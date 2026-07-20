@@ -14,7 +14,7 @@
 
 The Perfect Session core library, resurrected for Swift 6.2 / macOS 26. This is `taplin/Perfect-Session`, a fork within the [Perfect-Resurrection](https://github.com/taplin/Perfect-Resurrection) project — not the original PerfectlySoft codebase evolving, but a from-scratch rewrite of its API surface targeting the modern Swift toolchain and strict concurrency.
 
-**Status: core, in-use package.** [Perfect-Lasso](https://github.com/taplin/Perfect-Lasso) depends on this package directly (as a local path dependency) to back its session handling. Of the four storage backends this package ships, **MySQL is the one actually wired into the live scrubsSite production deployment** (`LASSO_SESSION_DRIVER=mysql`); PostgreSQL, Redis, and SQLite are real, fully implemented, tested alternatives available for a future backend swap, not currently the selected backend.
+**Status: core, in-use package.** [Perfect-Lasso](https://github.com/taplin/Perfect-Lasso) — a Swift reimplementation of the Lasso language, still in active development and not yet production-ready, though validated against real code from multiple production e-commerce sites — depends on this package directly (as a local path dependency) to back its session handling. Of the four storage backends this package ships, **MySQL is the one actually configured and exercised in Perfect-Lasso's development/validation setup** (`LASSO_SESSION_DRIVER=mysql`); PostgreSQL, Redis, and SQLite are real, fully implemented, tested alternatives available for a future backend swap, not currently the selected backend.
 
 ## Compatibility with Swift
 
@@ -46,10 +46,10 @@ targets: [
 
 Unlike the original upstream project, the database-specific drivers are **not separate repositories** — they are first-class targets/products built directly into this same package, in `Sources/`:
 
-* **PerfectSessionMySQL** — depends on `PerfectMySQL` (`../Perfect-MySQL`). **This is the driver currently active in production** (scrubsSite, via `LASSO_SESSION_DRIVER=mysql`).
-* **PerfectSessionPostgreSQL** — depends on `PerfectPostgreSQL` (`../Perfect-PostgreSQL`). Fully implemented and tested; not currently selected in production.
-* **PerfectSessionRedis** — depends on `PerfectRedis` (`../Perfect-Redis`) and `swift-log`. Fully implemented and tested; not currently selected in production.
-* **PerfectSessionSQLite** — depends on `PerfectSQLite` (`../Perfect-SQLite`) and `swift-log`. Fully implemented and tested; not currently selected in production.
+* **PerfectSessionMySQL** — depends on `PerfectMySQL` (`../Perfect-MySQL`). **This is the driver currently configured and exercised in Perfect-Lasso's development/validation testing** (scrubsSite, via `LASSO_SESSION_DRIVER=mysql`).
+* **PerfectSessionPostgreSQL** — depends on `PerfectPostgreSQL` (`../Perfect-PostgreSQL`). Fully implemented and tested; not currently the selected driver.
+* **PerfectSessionRedis** — depends on `PerfectRedis` (`../Perfect-Redis`) and `swift-log`. Fully implemented and tested; not currently the selected driver.
+* **PerfectSessionSQLite** — depends on `PerfectSQLite` (`../Perfect-SQLite`) and `swift-log`. Fully implemented and tested; not currently the selected driver.
 
 Each driver has its own matching test target (`PerfectSessionMySQLTests`, etc.) alongside `PerfectSessionCoreTests`. Simply depend on the product for the backend you want (see **Building** above) — there is no need to add anything beyond this package.
 
