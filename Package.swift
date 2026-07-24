@@ -3,7 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "PerfectSession",
-    platforms: [.macOS(.v14)],
+    platforms: [.macOS(.v12)],
     products: [
         .library(name: "PerfectSessionCore",         targets: ["PerfectSessionCore"]),
         .library(name: "PerfectSessionMySQL",         targets: ["PerfectSessionMySQL"]),
